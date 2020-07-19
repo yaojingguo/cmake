@@ -1,4 +1,3 @@
-
 #include "MathFunctions.h"
 
 #include <cmath>
