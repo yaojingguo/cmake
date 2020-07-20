@@ -7,6 +7,9 @@ target_include_directories(MathFunctions
                            INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
                            )
 
+# compiler flags
+target_link_libraries(MathFunctions PUBLIC tutorial_compiler_flags)
+
 # should we use our own math functions
 option(USE_MYMATH "Use tutorial provided math implementation" ON)
 if(USE_MYMATH)
@@ -15,6 +18,8 @@ if(USE_MYMATH)
 
   # first we add the executable that generates the table
   add_executable(MakeTable MakeTable.cxx)
+
+  target_link_libraries(MakeTable PRIVATE tutorial_compiler_flags)
 
   # add the command to generate the source code
   add_custom_command(
@@ -40,6 +45,7 @@ if(USE_MYMATH)
                         )
 
   target_link_libraries(MathFunctions PRIVATE SqrtLibrary)
+  target_link_libraries(SqrtLibrary PRIVATE tutorial_compiler_flags)
 endif()
 
 # define the symbol stating we are using the declspec(dllexport) when
